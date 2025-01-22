@@ -12,6 +12,7 @@ namespace MDIEFLIAGE
 {
     public partial class FormClasse : Form
     {
+        private int? selectedClasseId = null;
         public FormClasse()
         {
             InitializeComponent();
@@ -30,8 +31,8 @@ namespace MDIEFLIAGE
                 
                     MessageBox.Show("Donnees inserer", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Actualiser();
-               
-               
+                    Refresh();
+
             }
         }
         private void Actualiser()
@@ -47,6 +48,89 @@ namespace MDIEFLIAGE
         private void FormClasse_Load(object sender, EventArgs e)
         {
             Actualiser();
+            Refresh();
+        }
+
+        private void btnUpadateC_Click(object sender, EventArgs e)
+        {
+            if (selectedClasseId.HasValue)
+            {
+                using (var db = new DBScolaire())
+                {
+                    var classe = db.Classe.FirstOrDefault(c => c.Id == selectedClasseId.Value);
+                    if (classe != null)
+                    {
+                        
+                        classe.Libelle = textLibelle.Text;
+
+                        db.SaveChanges();
+
+                        MessageBox.Show("Donnees modifier.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Actualiser();
+                        Refresh();
+                    }
+                }
+            }
+
+        }
+
+        private void btnDeleteC_Click(object sender, EventArgs e)
+        {
+            if (selectedClasseId.HasValue)
+            {
+                var confirmResult = MessageBox.Show(
+                    "Voulez vous supprimer cette classe ?",
+                    "Confirmation",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    using (var db = new DBScolaire())
+                    {
+                        var classe = db.Classe.FirstOrDefault(c => c.Id == selectedClasseId.Value);
+                        if (classe != null)
+                        {
+                            db.Classe.Remove(classe);
+                            db.SaveChanges();
+
+                            MessageBox.Show("Classe supprimee avec succes.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Actualiser();
+                            Refresh();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                
+                selectedClasseId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Id"].Value);
+
+                using (var db = new DBScolaire())
+                {
+                    var classe = db.Classe.FirstOrDefault(c => c.Id == selectedClasseId.Value);
+                    if (classe != null)
+                    {
+                        
+                        textLibelle.Text = classe.Libelle;
+                        btnUpadateC.Enabled = true;
+                        btnDeleteC.Enabled = true;
+                    }
+                }
+            }
+
+        }
+        private void Refresh()
+        {
+            
+            textLibelle.Text = string.Empty;
+            btnUpadateC.Enabled = false;
+            btnDeleteC.Enabled = false;
+            selectedClasseId = null;
         }
     }
 }

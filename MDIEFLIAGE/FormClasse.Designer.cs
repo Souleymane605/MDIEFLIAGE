@@ -32,8 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnUpadateC = new System.Windows.Forms.Button();
+            this.btnDeleteC = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,34 +74,37 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(428, 378);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
-            // button1
+            // btnUpadateC
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.button1.Location = new System.Drawing.Point(92, 239);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 38);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Editer";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnUpadateC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnUpadateC.Location = new System.Drawing.Point(92, 239);
+            this.btnUpadateC.Name = "btnUpadateC";
+            this.btnUpadateC.Size = new System.Drawing.Size(115, 38);
+            this.btnUpadateC.TabIndex = 4;
+            this.btnUpadateC.Text = "Editer";
+            this.btnUpadateC.UseVisualStyleBackColor = false;
+            this.btnUpadateC.Click += new System.EventHandler(this.btnUpadateC_Click);
             // 
-            // button2
+            // btnDeleteC
             // 
-            this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Location = new System.Drawing.Point(92, 332);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 38);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Supprimer";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnDeleteC.BackColor = System.Drawing.Color.Red;
+            this.btnDeleteC.Location = new System.Drawing.Point(92, 332);
+            this.btnDeleteC.Name = "btnDeleteC";
+            this.btnDeleteC.Size = new System.Drawing.Size(115, 38);
+            this.btnDeleteC.TabIndex = 5;
+            this.btnDeleteC.Text = "Supprimer";
+            this.btnDeleteC.UseVisualStyleBackColor = false;
+            this.btnDeleteC.Click += new System.EventHandler(this.btnDeleteC_Click);
             // 
             // FormClasse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 477);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnDeleteC);
+            this.Controls.Add(this.btnUpadateC);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label1);
@@ -121,7 +124,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnUpadateC;
+        private System.Windows.Forms.Button btnDeleteC;
     }
 }
